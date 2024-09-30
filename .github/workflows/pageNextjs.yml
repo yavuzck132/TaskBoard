@@ -78,16 +78,6 @@ jobs:
         with:
           static_site_generator: next
 
-      # Restore cache
-      - name: Restore cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('taskboard/package-lock.json', 'taskboard/yarn.lock') }}-${{ hashFiles('taskboard/**/*.js', 'taskboard/**/*.jsx', 'taskboard/**/*.ts', 'taskboard/**/*.tsx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('taskboard/package-lock.json', 'taskboard/yarn.lock') }}-
-
       # Install dependencies
       - name: Install dependencies
         run: |
