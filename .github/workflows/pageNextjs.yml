@@ -48,13 +48,6 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
-
-      # Print the detected package manager
-      - name: Print detected package manager
-        run: |
-          echo "Detected package manager: ${{ steps.detect-package-manager.outputs.manager }}"
-          echo "Install command: ${{ steps.detect-package-manager.outputs.command }}"
-          echo "Runner command: ${{ steps.detect-package-manager.outputs.runner }}"
         
        # Setup Node.js without cache option
       - name: Setup Node
@@ -88,7 +81,15 @@ jobs:
       - name: Build with Next.js
         run: |
           cd taskboard
-          ${{ steps.detect-package-manager.outputs.runner }} next build
+          ${{ steps.detect-package-manager.outputs.runner }} next build && ${{ steps.detect-package-manager.outputs.runner }} next export
+
+      
+      # Verify the out file exists
+      - name: List build output (for debugging)
+        run: |
+          cd taskboard
+          ls -al
+          ls -al out
 
       # Upload the built artifact for Pages
       - name: Upload artifact
