@@ -81,15 +81,7 @@ jobs:
       - name: Build with Next.js
         run: |
           cd taskboard
-          ${{ steps.detect-package-manager.outputs.runner }} next build && ${{ steps.detect-package-manager.outputs.runner }} next export
-
-      
-      # Verify the out file exists
-      - name: List build output (for debugging)
-        run: |
-          cd taskboard
-          ls -al
-          ls -al out
+          ${{ steps.detect-package-manager.outputs.runner }} next build
 
       # Upload the built artifact for Pages
       - name: Upload artifact
