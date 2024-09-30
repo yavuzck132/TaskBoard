@@ -49,6 +49,13 @@ jobs:
             exit 1
           fi
 
+      # Print the detected package manager
+      - name: Print detected package manager
+        run: |
+          echo "Detected package manager: ${{ steps.detect-package-manager.outputs.manager }}"
+          echo "Install command: ${{ steps.detect-package-manager.outputs.command }}"
+          echo "Runner command: ${{ steps.detect-package-manager.outputs.runner }}"
+        
       # Setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
